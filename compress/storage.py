@@ -16,10 +16,7 @@ class CompressedStorage(FileSystemStorage):
     def __init__(self, *args, **kwargs):
         super(CompressedStorage, self).__init__(*args, **kwargs)
         self.finder = FileSystemFinder()
-        self.compressor = get_compressor_class()
-
-        if not callable(self.compressor):
-            self.compressor = self.compressor()
+        self.compressor = get_compressor_class()()
 
     def path(self, name):
         found = self.finder.find(name)
