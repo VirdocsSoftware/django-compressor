@@ -10,7 +10,7 @@ except ImportError:
 
 
 setup(
-    name='django-compress',
+    name='django-compressor',
     version='2.0.1',
     description='A Django app for compressing CSS and JS',
     author='Michael Crute',

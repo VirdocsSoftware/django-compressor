@@ -1,6 +1,6 @@
-===============
-Django Compress
-===============
+=================
+Django Compressor
+=================
 
 This is an asset compression framework for Django. Asset compressors
 concatenate and minify Javascript and CSS. While there are many other asset
