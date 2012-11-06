@@ -1,5 +1,4 @@
 *.pyc
 build/
 dist/
-django_compress.egg-info/
-django-compress-*/
+django_compressor.egg-info/
