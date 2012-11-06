@@ -88,7 +88,7 @@ your compress sets and place them alongside your other static files.
 
 **Note:** Your uncompressed assets will also be added to the static files root
 alongside your compressed assets. If there is anything secret in those files
-you may wnat to remove them.
+you may want to remove them.
 
 Optional Compress Tag Arguments
 ===============================
@@ -113,7 +113,7 @@ Debug Argument
 The ``debug`` keyword argument is special. The compress renderer interprets this
 as an override for the ``DEBUG`` flag in ``settings.py``. This can be used to
 always render the complete tag list or to always render the compressed version.
-Debug is use like any other keyword argument. The value is expected to be
+Debug is used like any other keyword argument. The value is expected to be
 either ``true`` or ``false``.
 
 Extending Compress
@@ -139,8 +139,8 @@ arguments passed to the ``compressed`` template tag will also be available.
 Pluggable Compressors
 ---------------------
 Out of the box compress supports yui-compressor. It is possible to extend
-compress with your own compressors. A compressor is simply a callable that
-accepts two arguments. The first argument is a StringIO object with the
+compress with your own compressors. A compressor is simply a callable class
+that accepts two arguments. The first argument is a StringIO object with the
 concatenated contents of the asset files. The original filename is the second
 argument. The compressor is expected to provide a string-like object that can
 be passed to Django's ``ContentFile``.
@@ -162,4 +162,5 @@ and provide your own implementation of ``args_for_file`` like so::
         def args_for_file(self, filename):
             return ["--type={0}".format(get_file_extension(filename))]
 
-In more complex cases just provide your own callable.
+In more complex cases just provide your own callable class who's initializer
+takes no arguments.
