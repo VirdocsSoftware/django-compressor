@@ -11,7 +11,7 @@ except ImportError:
 
 setup(
     name='django-compressor',
-    version='2.0.1',
+    version='2.0.2',
     description='A Django app for compressing CSS and JS',
     author='Michael Crute',
     author_email='mike@finiteloopsoftware.com',
