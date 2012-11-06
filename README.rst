@@ -10,12 +10,12 @@ deployments.
 
 Usage
 =====
-After using pip to install the package a few changes to `settings.py` will be
+After using pip to install the package a few changes to ``settings.py`` will be
 necessary. For best results it is recommended to use compress with Django's
 cached staticfiles provider which will inject file hashes into the name of the
 file.
 
-The following changes should be made to your `settings.py` file::
+The following changes should be made to your ``settings.py`` file::
 
     STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
     STATICFILES_COMPRESSOR = 'compress.compressor.YUICompressor'
@@ -30,18 +30,18 @@ The following changes should be made to your `settings.py` file::
         "compress",
     )
 
-**Note:** if you've already specified `STATICFILES_FINDERS` then just add
-`compress.storage.CompressedFileFinder` to the list.
+**Note:** if you've already specified ``STATICFILES_FINDERS`` then just add
+``compress.storage.CompressedFileFinder`` to the list.
 
-The `YUICompressor` provider will require the you have the `yui-compressor`
+The ``YUICompressor`` provider will require the you have the ``yui-compressor``
 binary on your path. Setting that up is beyond the scope of this readme,
 however most OS package managers have a package for yui-compressor.
 
 Compress Sets
 -------------
-Compress uses compress sets that are configured in `settings.py` as well as a
+Compress uses compress sets that are configured in ``settings.py`` as well as a
 custom template tag to support generation of CSS and JS tags in your templates.
-To configure compress sets add a `COMPRESS_SETS` variable to your `settings.py`
+To configure compress sets add a ``COMPRESS_SETS`` variable to your ``settings.py``
 file like so::
 
     COMPRESS_SETS = {
@@ -55,20 +55,20 @@ file like so::
 
 The key to the dictionary is the set name that will be used by the template
 tag. The value for each key is a list of static files to be included in that
-set. Paths are relative to the directories in `STATICFILES_DIRS`.
+set. Paths are relative to the directories in ``STATICFILES_DIRS``.
 
 The file extension for a set is important, this is how compress determines how
 to compress your assets and which HTML tags to render.
 
 Compress Tag
 ------------
-Once compress is configured in `settings.py` the last step is to use the
-`compressed` template tag to actually include the assets in a template. The
-first step is to load the `compressed` tag::
+Once compress is configured in ``settings.py`` the last step is to use the
+``compressed`` template tag to actually include the assets in a template. The
+first step is to load the ``compressed`` tag::
 
     {% load compressed %}
 
-Finally, include compressed sets by name using the `compressed` tag::
+Finally, include compressed sets by name using the ``compressed`` tag::
 
     {% compressed 'print.css' %}
 
@@ -82,7 +82,7 @@ the asset.
 
 Deploying Compress Applications
 -------------------------------
-To deploy an application using compress use the standard `collectstatic`
+To deploy an application using compress use the standard ``collectstatic``
 management command. This will generate concatenated and minified versions of
 your compress sets and place them alongside your other static files.
 
@@ -93,7 +93,7 @@ you may wnat to remove them.
 Optional Compress Tag Arguments
 ===============================
 The compress tags supports keyword arguments. With the exception of the special
-`debug` argument, the keyword arguments are passed directly to the template
+``debug`` argument, the keyword arguments are passed directly to the template
 engine when it renders the tags.
 
 Keyword arguments are any argument with a key followed by an = followed by a
@@ -110,11 +110,11 @@ own templates. More on that below.
 
 Debug Argument
 --------------
-The `debug` keyword argument is special. The compress renderer interperts this
-as an override for the `DEBUG` flag in `settings.py`. This can be used to
+The ``debug`` keyword argument is special. The compress renderer interperts this
+as an override for the ``DEBUG`` flag in ``settings.py``. This can be used to
 always render the complete tag list or to always render the compressed version.
 Debug is use like any other keyword argument. The value is expected to be
-either `true` or `false`.
+either ``true`` or ``false``.
 
 Extending Compress
 ==================
@@ -125,7 +125,7 @@ Template Overrides
 ------------------
 Compress looks up templates based on the extension of the set name. For
 example, if your set name is print.css then compress will try to load
-`compress/css_tag.html` from the template folder.
+``compress/css_tag.html`` from the template folder.
 
 Compress ships with templates for CSS and Javascript which can be overriden by
 providing your own templates in a compress folder in your application's
@@ -133,8 +133,8 @@ template location. Additional set types can be supported by providing
 additional templates.
 
 The template context in which the compress templates are rendered will always
-have a `path` variable which is the path to the asset file. Any keyword
-arguments passed to the `compressed` template tag will also be available.
+have a ``path`` variable which is the path to the asset file. Any keyword
+arguments passed to the ``compressed`` template tag will also be available.
 
 Pluggable Compressors
 ---------------------
@@ -143,17 +143,17 @@ compress with your own compressors. A compressor is simply a callable that
 accepts two arguments. The first argument is a StringIO object with the
 concatenated contents of the asset files. The original filename is the second
 argument. The compressor is expected to provide a string-like object that can
-be passed to Django's `ContentFile`.
+be passed to Django's ``ContentFile``.
 
 In the simplest of cases where the compressor does not need any special
-arguments it is possible to set the following settings in your `settings.py`
+arguments it is possible to set the following settings in your ``settings.py``
 file and write no more code::
 
     COMPRESSOR_COMMAND = "your-compressor"
     STATICFILES_COMPRESSOR = 'compress.compressor.BaseCompressor'
 
-If your compressor needs a few more arguments you can subclass `BaseCompressor`
-and provide your own implementation of `args_for_file` like so::
+If your compressor needs a few more arguments you can subclass ``BaseCompressor``
+and provide your own implementation of ``args_for_file`` like so::
 
     class YUICompressor(BaseCompressor):
 
