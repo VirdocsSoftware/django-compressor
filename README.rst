@@ -77,7 +77,7 @@ file in your compressed set, it will also forego any concatenation and
 compression.
 
 When your application is not in DEBUG mode compress will render a single tag
-for each compressed set that links to a contactenated and minified version of
+for each compressed set that links to a concatenated and minified version of
 the asset.
 
 Deploying Compress Applications
@@ -110,7 +110,7 @@ own templates. More on that below.
 
 Debug Argument
 --------------
-The ``debug`` keyword argument is special. The compress renderer interperts this
+The ``debug`` keyword argument is special. The compress renderer interprets this
 as an override for the ``DEBUG`` flag in ``settings.py``. This can be used to
 always render the complete tag list or to always render the compressed version.
 Debug is use like any other keyword argument. The value is expected to be
@@ -127,7 +127,7 @@ Compress looks up templates based on the extension of the set name. For
 example, if your set name is print.css then compress will try to load
 ``compress/css_tag.html`` from the template folder.
 
-Compress ships with templates for CSS and Javascript which can be overriden by
+Compress ships with templates for CSS and Javascript which can be overridden by
 providing your own templates in a compress folder in your application's
 template location. Additional set types can be supported by providing
 additional templates.
@@ -138,7 +138,7 @@ arguments passed to the ``compressed`` template tag will also be available.
 
 Pluggable Compressors
 ---------------------
-Out of the box compress supports yui-compressor. It is possible toe extend
+Out of the box compress supports yui-compressor. It is possible to extend
 compress with your own compressors. A compressor is simply a callable that
 accepts two arguments. The first argument is a StringIO object with the
 concatenated contents of the asset files. The original filename is the second
