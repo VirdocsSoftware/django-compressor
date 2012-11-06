@@ -1,0 +1,3 @@
+recursive-include compress/templates/compress *.html
+include LICENSE
+include README.rst
