@@ -2,3 +2,4 @@
 build/
 dist/
 django_compress.egg-info/
+django-compress-*/
