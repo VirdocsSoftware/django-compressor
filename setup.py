@@ -8,10 +8,12 @@ except ImportError:
     use_setuptools()
     from setuptools import setup
 
+from compress import __version__
+
 
 setup(
     name='django-compressor',
-    version='2.0.2',
+    version=__version__,
     description='A Django app for compressing CSS and JS',
     author='Michael Crute',
     author_email='mike@finiteloopsoftware.com',
