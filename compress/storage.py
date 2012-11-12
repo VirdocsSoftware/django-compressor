@@ -1,4 +1,5 @@
 import os
+from copy import copy
 from datetime import datetime
 from cStringIO import StringIO
 
@@ -20,6 +21,7 @@ class CompressedStorage(FileSystemStorage):
         super(CompressedStorage, self).__init__(*args, **kwargs)
         self.finder = FileSystemFinder()
         self.compressor = get_compressor_class()()
+        self.transformers = copy(CompressedStorage.transformer)
 
     def path(self, name):
         found = self.finder.find(name)
@@ -37,7 +39,7 @@ class CompressedStorage(FileSystemStorage):
     def munge_file(self, filename, contents):
         for transformer in self.transformers:
             if transformer.can_handle(filename):
-                return transformer()(filename, contents)
+                contents = transformer()(filename, contents)
 
         return contents
 

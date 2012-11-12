@@ -164,3 +164,25 @@ and provide your own implementation of ``args_for_file`` like so::
 
 In more complex cases just provide your own callable class who's initializer
 takes no arguments.
+
+Pluggable Transformers
+----------------------
+Transformers pre-process the concatenated files before they are handed to the
+compressor. The original use-case was to fix URLs in CSS files in the same way
+that the built-in staticfiles fixes URLs by adding the file hash to the name.
+
+Transformers are callable classes with a ``can_handle`` static method which
+takes a filename and returns a boolean value if the transformer can handle a
+given file. If the transformer can handle the file it will be constructed with
+no arguments and called with the filename as the first argument and a string
+with the file contents as the second argument. The function should return the
+transformed contents when it is finished.
+
+All transformers that can handle a file will be run before the file is given to
+the compressor.
+
+To register a transformer append it to the list of transformers on an instance
+of ``CompressedStorage`` like so::
+
+    comp = CompressedStorage()
+    comp.transformers.append(MyTransformerClass)
