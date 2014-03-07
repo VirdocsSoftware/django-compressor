@@ -7,7 +7,7 @@ from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.files.storage import FileSystemStorage
 from django.contrib.staticfiles.utils import matches_patterns
-from django.contrib.staticfiles.finders import BaseFinder, FileSystemFinder
+from django.contrib.staticfiles.finders import BaseFinder, FileSystemFinder, AppDirectoriesFinder
 
 from compress.transformers import CSSURLTransformer
 from compress.compressor import get_compressor_class
@@ -19,12 +19,13 @@ class CompressedStorage(FileSystemStorage):
 
     def __init__(self, *args, **kwargs):
         super(CompressedStorage, self).__init__(*args, **kwargs)
-        self.finder = FileSystemFinder()
+        self.finders = [FileSystemFinder(), AppDirectoriesFinder()]
         self.compressor = get_compressor_class()()
         self.transformers = copy(CompressedStorage.transformer)
 
     def path(self, name):
-        found = self.finder.find(name)
+	for finder in self.finders:
+            found = finder.find(name)
         return found if found else name
 
     def delete(self, name):
